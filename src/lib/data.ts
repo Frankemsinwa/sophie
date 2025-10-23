@@ -10,9 +10,9 @@ export const userData = {
 };
 
 export const metricsData = {
-  balance: 12345.67,
-  followers: 123000,
-  likes: 2300000,
+  balance: 180000,
+  followers: 2000000,
+  likes: 1000000,
   videoCount: 150,
 };
 
