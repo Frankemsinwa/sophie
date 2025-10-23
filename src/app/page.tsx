@@ -1,3 +1,6 @@
+
+'use client';
+
 import Image from "next/image";
 import {
   Card,
@@ -7,6 +10,11 @@ import {
   CardTitle,
   CardFooter
 } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { DashboardLayout } from "@/components/dashboard-layout";
 import { metricsData, videosData } from "@/lib/data";
 import { Users, Heart, Video, Eye, TrendingUp } from "lucide-react";
@@ -90,33 +98,46 @@ type VideoData = typeof videosData[0];
 
 function VideoCard({ video }: { video: VideoData }) {
   return (
-    <Card className="overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
-      <CardContent className="p-0">
-        <div className="relative">
+    <Dialog>
+      <Card className="overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+        <DialogTrigger asChild>
+          <CardContent className="p-0 cursor-pointer">
+            <div className="relative">
+              <Image
+                src={video.thumbnailUrl}
+                alt={video.title}
+                width={400}
+                height={225}
+                className="w-full object-cover aspect-video"
+                data-ai-hint={video.thumbnailHint}
+              />
+            </div>
+            <div className="p-4">
+              <h3 className="font-semibold text-base leading-tight truncate font-headline">{video.title}</h3>
+              <p className="text-sm text-muted-foreground mt-1">{video.publishedAt}</p>
+              <div className="flex items-center justify-start gap-4 text-sm text-muted-foreground mt-2">
+                <div className="flex items-center gap-1">
+                  <Eye className="h-4 w-4" />
+                  <span>{new Intl.NumberFormat('en-US', { notation: 'compact' }).format(video.views)}</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Heart className="h-4 w-4" />
+                  <span>{new Intl.NumberFormat('en-US', { notation: 'compact' }).format(video.likes)}</span>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </DialogTrigger>
+      </Card>
+      <DialogContent className="max-w-3xl">
           <Image
             src={video.thumbnailUrl}
             alt={video.title}
-            width={400}
-            height={225}
-            className="w-full object-cover aspect-video"
-            data-ai-hint={video.thumbnailHint}
+            width={1280}
+            height={720}
+            className="w-full object-contain rounded-lg"
           />
-        </div>
-        <div className="p-4">
-          <h3 className="font-semibold text-base leading-tight truncate font-headline">{video.title}</h3>
-          <p className="text-sm text-muted-foreground mt-1">{video.publishedAt}</p>
-          <div className="flex items-center justify-start gap-4 text-sm text-muted-foreground mt-2">
-            <div className="flex items-center gap-1">
-              <Eye className="h-4 w-4" />
-              <span>{new Intl.NumberFormat('en-US', { notation: 'compact' }).format(video.views)}</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <Heart className="h-4 w-4" />
-              <span>{new Intl.NumberFormat('en-US', { notation: 'compact' }).format(video.likes)}</span>
-            </div>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+      </DialogContent>
+    </Dialog>
   );
 }
