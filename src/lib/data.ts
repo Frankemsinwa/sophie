@@ -1,11 +1,10 @@
-
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const getImage = (id: string) => PlaceHolderImages.find(img => img.id === id)?.imageUrl || '';
 const getImageHint = (id: string) => PlaceHolderImages.find(img => img.id === id)?.imageHint || '';
 
 export const userData = {
-  name: 'Alex Doe',
+  name: 'Sophie Elizabeth',
   avatarUrl: getImage('user-avatar'),
   avatarHint: getImageHint('user-avatar'),
 };
@@ -20,7 +19,7 @@ export const metricsData = {
 export const videosData = [
   {
     id: 1,
-    title: 'Epic Gameplay Montage: My Best Moments',
+    title: 'Video Title 1: Gaming Highlights',
     thumbnailUrl: getImage('video-thumb-1'),
     thumbnailHint: getImageHint('video-thumb-1'),
     views: 257000,
@@ -31,7 +30,7 @@ export const videosData = [
   },
   {
     id: 2,
-    title: 'A Day in the Life of a Creator',
+    title: 'Video Title 2: A Creator\'s Life',
     thumbnailUrl: getImage('video-thumb-2'),
     thumbnailHint: getImageHint('video-thumb-2'),
     views: 89000,
@@ -42,7 +41,7 @@ export const videosData = [
   },
   {
     id: 3,
-    title: 'Bali Travel Diary',
+    title: 'Video Title 3: Bali Adventures',
     thumbnailUrl: getImage('video-thumb-3'),
     thumbnailHint: getImageHint('video-thumb-3'),
     views: 175000,
@@ -53,7 +52,7 @@ export const videosData = [
   },
   {
     id: 4,
-    title: 'My Secret to Perfect Sourdough',
+    title: 'Video Title 4: Sourdough Secrets',
     thumbnailUrl: getImage('video-thumb-4'),
     thumbnailHint: getImageHint('video-thumb-4'),
     views: 320000,
@@ -64,7 +63,7 @@ export const videosData = [
   },
    {
     id: 5,
-    title: 'Ultimate WFH Desk Setup Tour',
+    title: 'Video Title 5: Dream Desk Setup',
     thumbnailUrl: getImage('video-thumb-5'),
     thumbnailHint: getImageHint('video-thumb-5'),
     views: 112000,
