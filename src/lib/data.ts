@@ -29,13 +29,13 @@ export const videosData = [
   },
   {
     id: 2,
-    title: 'Deep Dive with a Tech Visionary - Podcast #23',
+    title: 'A day in the life of a content creator',
     thumbnailUrl: getImage('video-thumb-2'),
     thumbnailHint: getImageHint('video-thumb-2'),
     views: 89000,
     likes: 7500,
     publishedAt: '1 week ago',
-    category: 'Podcast',
+    category: 'Vlog',
   },
   {
     id: 3,

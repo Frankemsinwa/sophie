@@ -14,9 +14,9 @@
     },
     {
       "id": "video-thumb-2",
-      "description": "Video thumbnail 2",
-      "imageUrl": "https://images.unsplash.com/photo-1581368129682-e2d66324045b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxwb2RjYXN0JTIwaW50ZXJ2aWV3fGVufDB8fHx8MTc2MTEzMDE1MHww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "podcast interview"
+      "description": "Girl with headphones",
+      "imageUrl": "/girl-2.jpg",
+      "imageHint": "girl headphones"
     },
     {
       "id": "video-thumb-3",
