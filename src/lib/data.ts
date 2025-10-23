@@ -26,7 +26,7 @@ export const videosData = [
     likes: 12000,
     publishedAt: '3 days ago',
     category: 'Gaming',
-    videoUrl: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
+    videoUrl: '/VID-20251022-WA0030.mp4'
   },
   {
     id: 2,
