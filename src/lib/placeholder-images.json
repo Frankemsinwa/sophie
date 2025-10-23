@@ -29,6 +29,30 @@
       "description": "Video thumbnail 4",
       "imageUrl": "https://images.unsplash.com/photo-1640409084317-ada21bc20d14?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjb29raW5nJTIwdHV0b3JpYWx8ZW58MHx8fHwxNzYxMTIxMzk5fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "cooking tutorial"
+    },
+    {
+      "id": "video-thumb-5",
+      "description": "Video thumbnail 5",
+      "imageUrl": "https://images.unsplash.com/photo-1590212151175-e58edd96185b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxkZXNrJTIwc2V0dXB8ZW58MHx8fHwxNzYxMTgwNjk5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "desk setup"
+    },
+    {
+      "id": "video-thumb-6",
+      "description": "Video thumbnail 6",
+      "imageUrl": "https://images.unsplash.com/photo-1759701547262-d0226d28e814?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxnYW1pbmclMjBjaGFsbGVuZ2V8ZW58MHx8fHwxNzYxMTgwNjk5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "gaming challenge"
+    },
+    {
+      "id": "video-thumb-7",
+      "description": "Video thumbnail 7",
+      "imageUrl": "https://images.unsplash.com/photo-1689753859413-0ae96270ca17?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxkYWlseSUyMHZsb2d8ZW58MHx8fHwxNzYxMTgwNjk5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "daily vlog"
+    },
+    {
+      "id": "video-thumb-8",
+      "description": "Video thumbnail 8",
+      "imageUrl": "https://images.unsplash.com/photo-1760225529221-841ebb8e7867?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx0ZWNoJTIwdW5ib3hpbmd8ZW58MHx8fHwxNzYxMTE0NzEwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "tech unboxing"
     }
   ]
 }

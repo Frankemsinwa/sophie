@@ -21,7 +21,7 @@ import React from "react";
 
 const navItems = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
-  { href: "#", label: "Videos", icon: Video },
+  { href: "/videos", label: "Videos", icon: Video },
 ];
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
