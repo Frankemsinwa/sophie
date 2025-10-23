@@ -3,9 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  BarChart3,
   LayoutDashboard,
-  Settings,
   Video,
   Menu,
   type LucideIcon
@@ -24,8 +22,6 @@ import React from "react";
 const navItems = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
   { href: "#", label: "Videos", icon: Video },
-  { href: "#", label: "Analytics", icon: BarChart3 },
-  { href: "#", label: "Settings", icon: Settings },
 ];
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
