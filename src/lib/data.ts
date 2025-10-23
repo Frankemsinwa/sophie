@@ -37,6 +37,7 @@ export const videosData = [
     likes: 7500,
     publishedAt: '1 week ago',
     category: 'Vlog',
+    videoUrl: '/VID-20251022-WA0035.mp4'
   },
   {
     id: 3,
@@ -47,6 +48,7 @@ export const videosData = [
     likes: 9800,
     publishedAt: '2 weeks ago',
     category: 'Travel',
+    videoUrl: '/VID-20251022-WA0030.mp4'
   },
   {
     id: 4,
