@@ -161,14 +161,12 @@ function VideoCard({ video }: { video: VideoData & { videoUrl: string } }) {
       <DialogTrigger asChild>
         <Card className="overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
           <CardContent className="p-0 cursor-pointer">
-            <div className="relative">
-              <Image
-                src={video.thumbnailUrl}
-                alt={video.title}
-                width={400}
-                height={225}
-                className="w-full object-cover aspect-video"
-                data-ai-hint={video.thumbnailHint}
+            <div className="relative aspect-video">
+              <video
+                src={video.videoUrl}
+                muted
+                playsInline
+                className="w-full h-full object-cover"
               />
             </div>
             <div className="p-4">
@@ -178,8 +176,8 @@ function VideoCard({ video }: { video: VideoData & { videoUrl: string } }) {
           </CardContent>
         </Card>
       </DialogTrigger>
-      <DialogContent className="max-w-3xl">
-          <video controls src={video.videoUrl} className="w-full rounded-lg" />
+      <DialogContent className="max-w-3xl p-0">
+          <video controls autoPlay src={video.videoUrl} className="w-full rounded-lg" />
       </DialogContent>
     </Dialog>
   );
