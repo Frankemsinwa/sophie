@@ -1,3 +1,4 @@
+
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const getImage = (id: string) => PlaceHolderImages.find(img => img.id === id)?.imageUrl || '';
@@ -48,7 +49,7 @@ export const videosData = [
     likes: 9800,
     publishedAt: '2 weeks ago',
     category: 'Travel',
-    videoUrl: '/VID-20251022-WA0030.mp4'
+    videoUrl: '/VID-20251022-WA0031.mp4'
   },
   {
     id: 4,
@@ -59,6 +60,7 @@ export const videosData = [
     likes: 21000,
     publishedAt: '1 month ago',
     category: 'Cooking',
+    videoUrl: '/VID-20251022-WA0032.mp4'
   },
    {
     id: 5,
@@ -69,6 +71,7 @@ export const videosData = [
     likes: 8200,
     publishedAt: '1 month ago',
     category: 'Tech',
+    videoUrl: '/VID-20251022-WA0033.mp4'
   },
   {
     id: 6,
