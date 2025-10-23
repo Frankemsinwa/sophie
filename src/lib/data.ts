@@ -26,6 +26,7 @@ export const videosData = [
     likes: 12000,
     publishedAt: '3 days ago',
     category: 'Gaming',
+    videoUrl: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
   },
   {
     id: 2,
@@ -71,7 +72,7 @@ export const videosData = [
     id: 6,
     title: '24-Hour Gaming Challenge for Charity!',
     thumbnailUrl: getImage('video-thumb-6'),
-    thumbnailHint: getImageHint('video-thumb-6'),
+    thumbnailHint:getImageHint('video-thumb-6'),
     views: 550000,
     likes: 45000,
     publishedAt: '2 months ago',

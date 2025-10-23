@@ -32,6 +32,9 @@ export default function DashboardPage() {
     return num;
   };
 
+  const videosWithVideoUrl = videosData.filter(v => v.videoUrl);
+
+
   return (
     <DashboardLayout>
       <div className="flex-1 space-y-4 p-4 md:p-8 pt-6">
@@ -68,6 +71,16 @@ export default function DashboardPage() {
           </h2>
           <div className="grid gap-4 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {videosData.map((video) => (
+              <ImageCard key={video.id} video={video} />
+            ))}
+          </div>
+        </div>
+        <div className="space-y-4">
+          <h2 className="text-2xl font-bold tracking-tight font-headline">
+            Videos
+          </h2>
+          <div className="grid gap-4 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {videosWithVideoUrl.map((video) => (
               <VideoCard key={video.id} video={video} />
             ))}
           </div>
@@ -96,7 +109,7 @@ function MetricCard({ title, value, icon, footerText }: { title: string, value: 
 
 type VideoData = typeof videosData[0];
 
-function VideoCard({ video }: { video: VideoData }) {
+function ImageCard({ video }: { video: VideoData }) {
   return (
     <Dialog>
       <Card className="overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
@@ -137,6 +150,36 @@ function VideoCard({ video }: { video: VideoData }) {
             height={720}
             className="w-full object-contain rounded-lg"
           />
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+function VideoCard({ video }: { video: VideoData & { videoUrl: string } }) {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Card className="overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+          <CardContent className="p-0 cursor-pointer">
+            <div className="relative">
+              <Image
+                src={video.thumbnailUrl}
+                alt={video.title}
+                width={400}
+                height={225}
+                className="w-full object-cover aspect-video"
+                data-ai-hint={video.thumbnailHint}
+              />
+            </div>
+            <div className="p-4">
+              <h3 className="font-semibold text-base leading-tight truncate font-headline">{video.title}</h3>
+              <p className="text-sm text-muted-foreground mt-1">{video.publishedAt}</p>
+            </div>
+          </CardContent>
+        </Card>
+      </DialogTrigger>
+      <DialogContent className="max-w-3xl">
+          <video controls src={video.videoUrl} className="w-full rounded-lg" />
       </DialogContent>
     </Dialog>
   );
