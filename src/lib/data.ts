@@ -87,14 +87,4 @@ export const videosData = [
     publishedAt: '2 months ago',
     category: 'Vlog',
   },
-  {
-    id: 8,
-    title: 'Unboxing the Newest Smartphone in the Market',
-    thumbnailUrl: getImage('video-thumb-8'),
-    thumbnailHint: getImageHint('video-thumb-8'),
-    views: 210000,
-    likes: 15000,
-    publishedAt: '3 months ago',
-    category: 'Tech',
-  },
 ];
