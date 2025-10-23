@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from "next/image";
@@ -16,6 +17,8 @@ import {
 import { Button } from "./ui/button";
 
 export function UserProfile() {
+  const email = `${userData.name.replace(/\s+/g, '.').toLowerCase()}@gmail.com`;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -35,7 +38,7 @@ export function UserProfile() {
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">{userData.name}</p>
             <p className="text-xs leading-none text-muted-foreground">
-              creator@example.com
+              {email}
             </p>
           </div>
         </DropdownMenuLabel>
