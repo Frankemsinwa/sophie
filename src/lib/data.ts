@@ -31,7 +31,7 @@ export const videosData = [
   },
   {
     id: 2,
-    title: 'A day in the life of a content creator',
+    title: 'A Day in the Life of a Creator',
     thumbnailUrl: getImage('video-thumb-2'),
     thumbnailHint: getImageHint('video-thumb-2'),
     views: 89000,
@@ -42,7 +42,7 @@ export const videosData = [
   },
   {
     id: 3,
-    title: 'Exploring the Hidden Gems of Southeast Asia',
+    title: 'Bali Travel Diary',
     thumbnailUrl: getImage('video-thumb-3'),
     thumbnailHint: getImageHint('video-thumb-3'),
     views: 175000,
@@ -53,7 +53,7 @@ export const videosData = [
   },
   {
     id: 4,
-    title: 'How to Make the Perfect Sourdough Bread at Home',
+    title: 'My Secret to Perfect Sourdough',
     thumbnailUrl: getImage('video-thumb-4'),
     thumbnailHint: getImageHint('video-thumb-4'),
     views: 320000,
@@ -64,7 +64,7 @@ export const videosData = [
   },
    {
     id: 5,
-    title: 'My Desk Setup Tour 2024 | Ultimate WFH Space',
+    title: 'Ultimate WFH Desk Setup Tour',
     thumbnailUrl: getImage('video-thumb-5'),
     thumbnailHint: getImageHint('video-thumb-5'),
     views: 112000,
