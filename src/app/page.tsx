@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/dialog";
 import { DashboardLayout } from "@/components/dashboard-layout";
 import { metricsData, videosData } from "@/lib/data";
-import { Users, Heart, Video, Eye, TrendingUp } from "lucide-react";
+import { Users, Heart, Video, Eye, TrendingUp, MessageCircle } from "lucide-react";
 import { WithdrawDialog } from "@/components/withdraw-dialog";
 
 export default function DashboardPage() {
@@ -32,6 +32,7 @@ export default function DashboardPage() {
     return num;
   };
 
+  const imagesData = videosData.filter(v => !v.videoUrl);
   const videosWithVideoUrl = videosData.filter(v => v.videoUrl);
 
 
@@ -67,17 +68,17 @@ export default function DashboardPage() {
         </div>
         <div className="space-y-4">
           <h2 className="text-2xl font-bold tracking-tight font-headline">
-            Recent videos and images
+            Recent Images
           </h2>
           <div className="grid gap-4 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {videosData.map((video) => (
-              <ImageCard key={video.id} video={video} />
+            {imagesData.map((image) => (
+              <ImageCard key={image.id} image={image} />
             ))}
           </div>
         </div>
         <div className="space-y-4">
           <h2 className="text-2xl font-bold tracking-tight font-headline">
-            Videos
+            Recent Videos
           </h2>
           <div className="grid gap-4 md:gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {videosWithVideoUrl.map((video) => (
@@ -109,7 +110,7 @@ function MetricCard({ title, value, icon, footerText }: { title: string, value: 
 
 type VideoData = typeof videosData[0];
 
-function ImageCard({ video }: { video: VideoData }) {
+function ImageCard({ image }: { image: VideoData }) {
   return (
     <Dialog>
       <Card className="overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
@@ -117,25 +118,25 @@ function ImageCard({ video }: { video: VideoData }) {
           <CardContent className="p-0 cursor-pointer">
             <div className="relative">
               <Image
-                src={video.thumbnailUrl}
-                alt={video.title}
+                src={image.thumbnailUrl}
+                alt={image.title}
                 width={400}
                 height={225}
                 className="w-full object-cover aspect-video"
-                data-ai-hint={video.thumbnailHint}
+                data-ai-hint={image.thumbnailHint}
               />
             </div>
             <div className="p-4">
-              <h3 className="font-semibold text-base leading-tight truncate font-headline">{video.title}</h3>
-              <p className="text-sm text-muted-foreground mt-1">{video.publishedAt}</p>
+              <h3 className="font-semibold text-base leading-tight truncate font-headline">{image.title}</h3>
+              <p className="text-sm text-muted-foreground mt-1">{image.publishedAt}</p>
               <div className="flex items-center justify-start gap-4 text-sm text-muted-foreground mt-2">
                 <div className="flex items-center gap-1">
-                  <Eye className="h-4 w-4" />
-                  <span>{new Intl.NumberFormat('en-US', { notation: 'compact' }).format(video.views)}</span>
+                  <Heart className="h-4 w-4" />
+                  <span>{new Intl.NumberFormat('en-US', { notation: 'compact' }).format(image.likes)}</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <Heart className="h-4 w-4" />
-                  <span>{new Intl.NumberFormat('en-US', { notation: 'compact' }).format(video.likes)}</span>
+                  <MessageCircle className="h-4 w-4" />
+                  <span>{new Intl.NumberFormat('en-US', { notation: 'compact' }).format(image.comments)}</span>
                 </div>
               </div>
             </div>
@@ -144,8 +145,8 @@ function ImageCard({ video }: { video: VideoData }) {
       </Card>
       <DialogContent className="max-w-3xl">
           <Image
-            src={video.thumbnailUrl}
-            alt={video.title}
+            src={image.thumbnailUrl}
+            alt={image.title}
             width={1280}
             height={720}
             className="w-full object-contain rounded-lg"
@@ -172,6 +173,20 @@ function VideoCard({ video }: { video: VideoData & { videoUrl: string } }) {
             <div className="p-4">
               <h3 className="font-semibold text-base leading-tight truncate font-headline">{video.title}</h3>
               <p className="text-sm text-muted-foreground mt-1">{video.publishedAt}</p>
+              <div className="flex items-center justify-start gap-4 text-sm text-muted-foreground mt-2">
+                <div className="flex items-center gap-1">
+                  <Eye className="h-4 w-4" />
+                  <span>{new Intl.NumberFormat('en-US', { notation: 'compact' }).format(video.views)}</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Heart className="h-4 w-4" />
+                  <span>{new Intl.NumberFormat('en-US', { notation: 'compact' }).format(video.likes)}</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <MessageCircle className="h-4 w-4" />
+                  <span>{new Intl.NumberFormat('en-US', { notation: 'compact' }).format(video.comments)}</span>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
