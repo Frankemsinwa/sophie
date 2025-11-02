@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState } from 'react';
@@ -38,11 +39,7 @@ export function WithdrawDialog() {
   const handleWithdraw = () => {
     setIsLoading(true);
     setError(false);
-    setTimeout(() => {
-      setIsLoading(false);
-      setError(true); // Simulate an error after 4 seconds
-      setStep(4);
-    }, 4000);
+    setStep(3);
   };
 
   const handleTryAgain = () => {
@@ -105,7 +102,7 @@ export function WithdrawDialog() {
           </div>
         )}
 
-        {step === 3 && (
+        {(step === 3 || isLoading) && (
           <div className="flex flex-col items-center justify-center py-8">
             <Loader2 className="h-12 w-12 animate-spin text-primary" />
             <p className="mt-4 text-muted-foreground">Please wait...</p>
