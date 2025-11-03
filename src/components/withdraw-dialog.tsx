@@ -9,13 +9,14 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-  DialogTrigger
+  DialogTrigger,
+  DialogClose
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Input } from "@/components/ui/input";
-import { DollarSign, ArrowRight, Loader2, XCircle } from "lucide-react";
+import { DollarSign, ArrowRight, Loader2, Clock, CheckCircle, XCircle } from "lucide-react";
 import { PaymentIcons } from "./payment-icons";
 import { cn } from "@/lib/utils";
 
@@ -27,9 +28,8 @@ const paymentMethods = [
 
 export function WithdrawDialog() {
   const [selectedMethod, setSelectedMethod] = useState("bank");
-  const [step, setStep] = useState(1); // 1: method selection, 2: amount input, 3: processing, 4: error
+  const [step, setStep] = useState(1); // 1: method selection, 2: amount, 3: processing, 4: pending, 5: success, 6: error
   const [amount, setAmount] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
   const handleContinue = () => {
@@ -37,19 +37,24 @@ export function WithdrawDialog() {
   };
 
   const handleWithdraw = () => {
-    setIsLoading(true);
     setError(false);
-    setStep(3);
+    setStep(3); // Start processing
+    setTimeout(() => {
+        setStep(4); // Move to pending after 3 seconds
+        setTimeout(() => {
+            setStep(5); // Move to success after another 5 seconds
+        }, 5000);
+    }, 3000);
   };
 
-  const handleTryAgain = () => {
+  const resetFlow = () => {
     setStep(1);
     setAmount("");
     setError(false);
   };
 
   return (
-    <Dialog>
+    <Dialog onOpenChange={(open) => !open && resetFlow()}>
       <DialogTrigger asChild>
         <Button size="sm" className="w-full sm:w-auto">
           <DollarSign className="mr-2 h-4 w-4" /> Withdraw
@@ -62,7 +67,9 @@ export function WithdrawDialog() {
             {step === 1 && "Choose your preferred payment method to withdraw your balance."}
             {step === 2 && `Enter the amount to withdraw via ${paymentMethods.find(m => m.id === selectedMethod)?.name}.`}
             {step === 3 && "Processing your withdrawal..."}
-            {step === 4 && "Withdrawal failed."}
+            {step === 4 && "Your withdrawal is pending."}
+            {step === 5 && "Withdrawal successful!"}
+            {step === 6 && "Withdrawal failed."}
           </DialogDescription>
         </DialogHeader>
 
@@ -101,18 +108,32 @@ export function WithdrawDialog() {
             />
           </div>
         )}
-
-        {(step === 3 || isLoading) && (
+        
+        {step === 3 && (
           <div className="flex flex-col items-center justify-center py-8">
             <Loader2 className="h-12 w-12 animate-spin text-primary" />
-            <p className="mt-4 text-muted-foreground">Please wait...</p>
+            <p className="mt-4 text-muted-foreground">Processing...</p>
           </div>
         )}
 
-        {step === 4 && error && (
+        {step === 4 && (
+          <div className="flex flex-col items-center justify-center py-8">
+            <Clock className="h-12 w-12 text-yellow-500" />
+            <p className="mt-4 text-muted-foreground">Pending...</p>
+          </div>
+        )}
+        
+        {step === 5 && (
+            <div className="flex flex-col items-center justify-center py-8 text-green-500">
+                <CheckCircle className="h-12 w-12" />
+                <p className="mt-4">Your funds are on the way!</p>
+            </div>
+        )}
+
+        {step === 6 && error && (
           <div className="flex flex-col items-center justify-center py-8 text-red-500">
             <XCircle className="h-12 w-12" />
-            <p className="mt-4">An error occurred during withdrawal. Please try again.</p>
+            <p className="mt-4">An error occurred. Please try again.</p>
           </div>
         )}
 
@@ -127,8 +148,15 @@ export function WithdrawDialog() {
               Proceed
             </Button>
           )}
-          {step === 4 && (
-            <Button type="button" onClick={handleTryAgain} className="w-full">
+          {step === 5 && (
+            <DialogClose asChild>
+                <Button type="button" className="w-full">
+                Done
+                </Button>
+            </DialogClose>
+          )}
+          {step === 6 && (
+            <Button type="button" onClick={resetFlow} className="w-full">
               Try Again
             </Button>
           )}
