@@ -41,7 +41,7 @@ export function WithdrawDialog() {
     const value = e.target.value;
     setAccountNumber(value);
     if (value.length === 9) {
-      setAccountName("Micheal Dabish");
+      setAccountName("Micheal Dobish");
       setBankName("Exchange bank");
     } else {
       setAccountName("");
@@ -91,7 +91,7 @@ export function WithdrawDialog() {
           <DialogTitle className="font-headline">Withdraw Funds</DialogTitle>
           <DialogDescription>
             {step === 1 && "Choose your preferred payment method to withdraw your balance."}
-            {step === 2 && `Enter your details and the amount to withdraw.`}
+            {step === 2 && `Enter your details for ${paymentMethods.find(p => p.id === selectedMethod)?.name}.`}
             {step === 3 && "Processing your withdrawal..."}
             {step === 4 && "Transaction Reversed"}
           </DialogDescription>
