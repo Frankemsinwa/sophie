@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { DollarSign, ArrowRight, Loader2, Clock, CheckCircle, XCircle } from "lucide-react";
 import { PaymentIcons } from "./payment-icons";
 import { cn } from "@/lib/utils";
+import { FormDescription } from './ui/form';
 
 const paymentMethods = [
   { id: "paypal", name: "PayPal", icon: "paypal" },
@@ -160,6 +161,9 @@ export function WithdrawDialog() {
                 value={amount}
                 onChange={handleAmountChange}
               />
+              <p className="text-sm text-muted-foreground">
+                You can withdraw up to ${MAX_WITHDRAWAL_AMOUNT.toLocaleString()} at a time.
+              </p>
               {amountError && <p className="text-sm text-red-500">{amountError}</p>}
             </div>
           </div>
