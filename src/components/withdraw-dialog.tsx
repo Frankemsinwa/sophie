@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -26,31 +26,57 @@ const paymentMethods = [
   { id: "crypto", name: "Crypto Wallet", icon: "crypto" },
 ];
 
+const MAX_WITHDRAWAL_AMOUNT = 50000;
+
 export function WithdrawDialog() {
   const [selectedMethod, setSelectedMethod] = useState("bank");
-  const [step, setStep] = useState(1); // 1: method selection, 2: amount, 3: processing, 4: pending, 5: success, 6: error
+  const [step, setStep] = useState(1); // 1: method, 2: details, 3: processing, 4: reversed
   const [amount, setAmount] = useState("");
-  const [error, setError] = useState(false);
+  const [accountNumber, setAccountNumber] = useState("");
+  const [accountName, setAccountName] = useState("");
+  const [bankName, setBankName] = useState("");
+  const [amountError, setAmountError] = useState("");
+
+  const handleAccountNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setAccountNumber(value);
+    if (value.length === 9) {
+      setAccountName("Micheal Dabish");
+      setBankName("Exchange bank");
+    } else {
+      setAccountName("");
+      setBankName("");
+    }
+  };
+
+  const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setAmount(value);
+    if (Number(value) > MAX_WITHDRAWAL_AMOUNT) {
+      setAmountError(`Maximum withdrawal amount is $${MAX_WITHDRAWAL_AMOUNT.toLocaleString()}.`);
+    } else {
+      setAmountError("");
+    }
+  };
 
   const handleContinue = () => {
     setStep(2);
   };
 
   const handleWithdraw = () => {
-    setError(false);
     setStep(3); // Start processing
     setTimeout(() => {
-        setStep(4); // Move to pending after 3 seconds
-        setTimeout(() => {
-            setStep(5); // Move to success after another 5 seconds
-        }, 5000);
-    }, 3000);
+        setStep(4); // Move to reversed after 4 seconds
+    }, 4000);
   };
 
   const resetFlow = () => {
     setStep(1);
     setAmount("");
-    setError(false);
+    setAccountNumber("");
+    setAccountName("");
+    setBankName("");
+    setAmountError("");
   };
 
   return (
@@ -65,11 +91,9 @@ export function WithdrawDialog() {
           <DialogTitle className="font-headline">Withdraw Funds</DialogTitle>
           <DialogDescription>
             {step === 1 && "Choose your preferred payment method to withdraw your balance."}
-            {step === 2 && `Enter the amount to withdraw via ${paymentMethods.find(m => m.id === selectedMethod)?.name}.`}
+            {step === 2 && `Enter your details and the amount to withdraw.`}
             {step === 3 && "Processing your withdrawal..."}
-            {step === 4 && "Your withdrawal is pending."}
-            {step === 5 && "Withdrawal successful!"}
-            {step === 6 && "Withdrawal failed."}
+            {step === 4 && "Transaction Reversed"}
           </DialogDescription>
         </DialogHeader>
 
@@ -97,15 +121,47 @@ export function WithdrawDialog() {
 
         {step === 2 && (
           <div className="grid gap-4 py-4">
-            <Label htmlFor="amount" className="sr-only">Amount</Label>
-            <Input
-              id="amount"
-              type="number"
-              placeholder="Enter amount"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              className="col-span-3"
-            />
+             <div className="space-y-2">
+              <Label htmlFor="accountNumber">Account Number</Label>
+              <Input
+                id="accountNumber"
+                placeholder="Enter 9-digit account number"
+                value={accountNumber}
+                onChange={handleAccountNumberChange}
+                maxLength={9}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="accountName">Account Name</Label>
+              <Input
+                id="accountName"
+                placeholder="Account name"
+                value={accountName}
+                readOnly
+                className="bg-muted"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="bankName">Bank Name</Label>
+              <Input
+                id="bankName"
+                placeholder="Bank name"
+                value={bankName}
+                readOnly
+                className="bg-muted"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="amount">Amount</Label>
+              <Input
+                id="amount"
+                type="number"
+                placeholder="Enter amount"
+                value={amount}
+                onChange={handleAmountChange}
+              />
+              {amountError && <p className="text-sm text-red-500">{amountError}</p>}
+            </div>
           </div>
         )}
         
@@ -117,23 +173,9 @@ export function WithdrawDialog() {
         )}
 
         {step === 4 && (
-          <div className="flex flex-col items-center justify-center py-8">
-            <Clock className="h-12 w-12 text-yellow-500" />
-            <p className="mt-4 text-muted-foreground">Pending...</p>
-          </div>
-        )}
-        
-        {step === 5 && (
-            <div className="flex flex-col items-center justify-center py-8 text-green-500">
-                <CheckCircle className="h-12 w-12" />
-                <p className="mt-4">Your funds are on the way!</p>
-            </div>
-        )}
-
-        {step === 6 && error && (
           <div className="flex flex-col items-center justify-center py-8 text-red-500">
             <XCircle className="h-12 w-12" />
-            <p className="mt-4">An error occurred. Please try again.</p>
+            <p className="mt-4 text-center">Sorry, the transaction has been reversed. Please try again later.</p>
           </div>
         )}
 
@@ -144,21 +186,21 @@ export function WithdrawDialog() {
             </Button>
           )}
           {step === 2 && (
-            <Button type="button" onClick={handleWithdraw} className="w-full" disabled={!amount || parseFloat(amount) <= 0}>
+            <Button 
+              type="button" 
+              onClick={handleWithdraw} 
+              className="w-full" 
+              disabled={!amount || parseFloat(amount) <= 0 || !!amountError || !accountName}
+            >
               Proceed
             </Button>
           )}
-          {step === 5 && (
+          {(step === 4) && (
             <DialogClose asChild>
-                <Button type="button" className="w-full">
-                Done
+                <Button type="button" className="w-full" onClick={resetFlow}>
+                Close
                 </Button>
             </DialogClose>
-          )}
-          {step === 6 && (
-            <Button type="button" onClick={resetFlow} className="w-full">
-              Try Again
-            </Button>
           )}
         </DialogFooter>
       </DialogContent>
